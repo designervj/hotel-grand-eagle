@@ -61,11 +61,11 @@ export default function VelourFooter() {
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "13px", color: "var(--ivory-dim)" }}>
                 <FiMapPin style={{ color: "var(--gold)", marginTop: "2px", flexShrink: 0 }} size={16} />
-                <span>{hotel?.address || '12 Palace Road, Jaipur, Rajasthan 302001'}</span>
+                <span>{hotel?.address || 'Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022'}</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--ivory-dim)" }}>
                 <FiPhone style={{ color: "var(--gold)", flexShrink: 0 }} size={16} />
-                <span>{hotel?.phone || '+91 63678 50548'}</span>
+                <span>{hotel?.phone || hotel?.contactNumber || '063678 50548'}</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "13px", color: "var(--ivory-dim)" }}>
                 <FiMail style={{ color: "var(--gold)", flexShrink: 0 }} size={16} />

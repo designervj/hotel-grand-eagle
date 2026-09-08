@@ -44,8 +44,8 @@ export default function VelourHeader() {
         { label: "Contact", href: "/contact" },
     ];
 
-    const phone = hotel?.phone || "+91 63678 50548";
-    const phoneTel = hotel?.phone || "+916367850548";
+    const phone = hotel?.phone || hotel?.contactNumber || "063678 50548";
+    const phoneTel = phone.replace(/\D/g, "");
 
     return (
         <>

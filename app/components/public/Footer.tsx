@@ -55,7 +55,7 @@ export default function Footer() {
                         </li>
                         <li className="flex items-center gap-3">
                             <span>📞</span>
-                            <span>{hotel?.contactNumber || "+91 63678 50548"}</span>
+                            <span>{hotel?.contactNumber || "063678 50548"}</span>
                         </li>
                         <li className="flex items-center gap-3">
                             <span>✉️</span>
