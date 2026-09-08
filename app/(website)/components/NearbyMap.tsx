@@ -11,7 +11,7 @@ const hotelLocation = {
     lat: 26.7769,
     lng: 75.8123,
     name: "Hotel Grand Eagle",
-    address: "Commercial Complex, C-50, Sanganer, Jaipur 302022"
+    address: "Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022"
 };
 
 export default function NearbyMap({ places, selectedPlaceId }: NearbyMapProps) {

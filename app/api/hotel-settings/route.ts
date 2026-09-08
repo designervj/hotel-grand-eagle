@@ -2,19 +2,20 @@ import { NextResponse } from "next/server";
 import { getDatabase } from "@/app/utils/getDatabase";
 
 const DEFAULT_SETTINGS = {
-    name: "HOTEL GRAND EAGLE",
-    shortDescription: "Iconic 5-star urban retreat with panoramic city views.",
-    address: "123 Eagle Avenue, Downtown District",
-    city: "Metropolis",
-    country: "United Arab Emirates",
-    contactNumber: "+91 63678 50548",
+    name: "Hotel Grand Eagle",
+    shortDescription: "Comfortable value-for-money hotel in Sitapura, Jaipur.",
+    address: "Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022",
+    city: "Jaipur",
+    country: "India",
+    contactNumber: "063678 50548",
+    phone: "063678 50548",
     email: "reservations@hotelgrandeagle.com",
     checkInTime: "15:00",
     checkOutTime: "12:00",
-    starRating: 5,
+    starRating: 3,
     logoUrl: "/logo.png",
     gstNumber: "",
-    website: "",
+    website: "https://hotelgrandeagle.in",
     bankDetails: "",
 };
 

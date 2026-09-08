@@ -25,7 +25,7 @@ function loadEnv() {
 loadEnv();
 
 const uri = process.env.MONGODB_URI;
-const dbName = process.env.MONGODB_DB || 'hotel_management';
+const dbName = process.env.MONGODB_DB || 'kp_hote_grand_eagle';
 
 if (!uri) {
   console.error("MONGODB_URI not found in .env");

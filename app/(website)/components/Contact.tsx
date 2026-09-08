@@ -49,7 +49,7 @@ export default function Contact() {
               </div>
               <div>
                 <span className="contact-lbl">Direct Line</span>
-                <span className="contact-val">{hotel?.phone || '+91 63678 50548'}</span>
+                <span className="contact-val">{hotel?.phone || hotel?.contactNumber || '063678 50548'}</span>
               </div>
             </div>
             <div className="contact-item fade-in-up visible">
@@ -73,7 +73,7 @@ export default function Contact() {
               </div>
               <div>
                 <span className="contact-lbl">Address</span>
-                <span className="contact-val">{hotel?.address || '12 Palace Road, Jaipur, Rajasthan 302001'}</span>
+                <span className="contact-val">{hotel?.address || 'Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022'}</span>
               </div>
             </div>
             <div className="contact-item fade-in-up visible">

@@ -115,7 +115,7 @@ export default function Navbar() {
                         </Link>
                         <a href={`tel:${hotel?.contactNumber || "+916367850548"}`} className="bg-[#d4a857] hover:bg-[#c19541] text-black px-4 xl:px-6 py-2 xl:py-2.5 font-black text-[10px] xl:text-xs tracking-wider transition-all duration-300 flex items-center gap-2 h-10 md:h-11 whitespace-nowrap shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-95 group rounded-[2px] border border-black/10">
                             <span className="text-base xl:text-lg group-hover:rotate-12 transition-transform">📞</span> 
-                            <span className="font-black uppercase">{hotel?.contactNumber || "+91 63678 50548"}</span>
+                            <span className="font-black uppercase">{hotel?.contactNumber || "063678 50548"}</span>
                         </a>
                         
                         {/* Mobile Menu Button - VISIBLE ONLY ON MOBILE */}
@@ -165,7 +165,7 @@ export default function Navbar() {
                             );
                         })}
                         <a href={`tel:${hotel?.contactNumber || "+916367850548"}`} className="bg-[#d4a857] text-black py-4.5 text-center font-black text-base tracking-[0.2em] mt-6 inline-block w-full rounded-[2px] shadow-lg">
-                            CALL US: {hotel?.contactNumber || "+91 63678 50548"}
+                            CALL US: {hotel?.contactNumber || "063678 50548"}
                         </a>
                     </div>
                 </div>
