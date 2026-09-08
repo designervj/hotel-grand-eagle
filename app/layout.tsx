@@ -15,6 +15,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "HOTEL GRAND EAGLE",
   description: "Premium Hotel Experience",
+  icons: {
+    icon: [
+      { url: "/eagle-favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/eagle-favicon.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: "/eagle-favicon.png",
+    apple: "/eagle-favicon.png",
+  },
 };
 
 export default function RootLayout({
