@@ -528,7 +528,12 @@ const DEFAULT_SECTIONS: HomeSection[] = [
         primaryButtonLink: "#rooms",
         secondaryButtonLabel: "Our Story",
         secondaryButtonLink: "#about",
-        images: [{ url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop" }],
+        images: [
+            { url: "/hotel-img/hero-grand-exterior.jpg" },
+            { url: "/hotel-img/hotel-exterior-night.jpg" },
+            { url: "/hotel-img/hotel-palace-heritage.jpg" },
+            { url: "/hotel-img/lobby-grand-chandelier.jpg" },
+        ],
         stats: [
             { id: uid(), value: "10+", label: "Years of Comfort" },
             { id: uid(), value: "340+", label: "Happy Guests" },

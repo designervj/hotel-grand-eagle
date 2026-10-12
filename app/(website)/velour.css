@@ -165,7 +165,7 @@
 }
 .hero-bg{
   position:absolute;inset:0;
-  background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop');
+  background-image:url('/hotel-img/IMG_0873.JPG');
   background-size:cover;background-position:center;
   transform:scale(1.05);
   animation:heroZoom 20s ease-in-out infinite alternate;

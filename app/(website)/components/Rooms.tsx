@@ -105,7 +105,7 @@ export default function Rooms({ roomsData = [], amenitiesData = [] }: RoomsProps
             <div className="room-card" style={{ width: "100%", maxWidth: "420px", margin: 0 }}>
               <Link href={`/room/${rooms[0]?.id}`} className="room-img-wrap" style={{ display: 'block' }}>
                 <img
-                  src={rooms[0].images?.[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800"}
+                  src={rooms[0].images?.[0] || "/hotel-img/IMG_0873.JPG"}
                   alt={rooms[0].roomName}
                   loading="lazy"
                 />
@@ -178,7 +178,7 @@ export default function Rooms({ roomsData = [], amenitiesData = [] }: RoomsProps
               <div key={idx} className="room-card">
                 <Link href={`/room/${room?.id}`} className="room-img-wrap" style={{ display: 'block' }}>
                   <img
-                    src={room.images?.[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800"}
+                    src={room.images?.[0] || "/hotel-img/IMG_0873.JPG"}
                     alt={room.roomName}
                     loading="lazy"
                   />

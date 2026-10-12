@@ -10,7 +10,7 @@ const FALLBACK_ABOUT_SECTIONS: AboutSection[] = [
         heading: "Budget-Friendly Stay in Jaipur",
         description: "Hotel Grand Eagle is a value-for-money hotel offering clean, well-furnished rooms tailored for both business travelers and tourists. Each room is thoughtfully equipped with essentials such as air conditioning, private bathrooms, comfortable chairs, work desks, telephones, televisions, and 24/7 hot and cold water supply.\n\nLocated near JECC, major transport hubs, hospitals, colleges, and local food joints, our hotel is perfect for budget-conscious travelers seeking convenience and accessibility in Jaipur's Sitapura Industrial Area.",
         highlightTerms: "value-for-money hotel, air conditioning, private bathrooms, work desks, televisions, 24/7 hot and cold water supply, JECC, transport hubs, budget-conscious travelers, Sitapura Industrial Area",
-        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop",
+        image: "/hotel-img/IMG_0873.JPG",
         imagePosition: "left",
         stats: [
             { id: "est", value: "2001", label: "Est. in Jaipur" },

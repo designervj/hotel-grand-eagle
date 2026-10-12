@@ -53,8 +53,8 @@ export default function Contact() {
     <section id="contact" style={{ padding: "112px 0", position: "relative", overflow: "hidden" }}>
       <div className="contact-bg">
         <img
-          src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800"
-          alt=""
+          src="/hotel-img/IMG_0953.JPG"
+          alt="Contact Hotel Grand Eagle"
         />
         <div className="contact-bg-grad"></div>
       </div>

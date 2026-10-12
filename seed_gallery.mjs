@@ -8,18 +8,26 @@ const MONGODB_DB = mongoDbMatch ? mongoDbMatch[1].trim().replace(/^"|"$/g, '') :
 import { MongoClient } from 'mongodb';
 
 const GALLERY_IMAGES = [
-    { id: "gal_1", url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800", label: "Grand Lobby", order: 0 },
-    { id: "gal_2", url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800", label: "Infinity Pool", order: 1 },
-    { id: "gal_3", url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800", label: "Dining Hall", order: 2 },
-    { id: "gal_4", url: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800", label: "Spa Sanctuary", order: 3 },
-    { id: "gal_5", url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800", label: "Garden Suite", order: 4 },
-    { id: "gal_6", url: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1200", label: "Luxury Suite", order: 5 },
-    { id: "gal_7", url: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1200", label: "Executive Room", order: 6 },
-    { id: "gal_8", url: "https://images.unsplash.com/photo-1590490359683-658d3d23f972?q=80&w=1200", label: "Lounge Area", order: 7 },
-    { id: "gal_9", url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1200", label: "Pool Deck", order: 8 },
-    { id: "gal_10", url: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200", label: "Deluxe Room", order: 9 },
-    { id: "gal_11", url: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200", label: "Beach View", order: 10 },
-    { id: "gal_12", url: "https://images.unsplash.com/photo-1551882547-ff43c63efe81?q=80&w=1200", label: "Night View", order: 11 },
+    { id: "gal_1", url: "/hotel-img/hero-grand-exterior.jpg", label: "Grand Entrance", order: 0 },
+    { id: "gal_2", url: "/hotel-img/lobby-grand-chandelier.jpg", label: "Grand Lobby", order: 1 },
+    { id: "gal_3", url: "/hotel-img/royal-suite-master.jpg", label: "Royal Suite", order: 2 },
+    { id: "gal_4", url: "/hotel-img/deluxe-king-room.jpg", label: "Deluxe King Room", order: 3 },
+    { id: "gal_5", url: "/hotel-img/twin-standard-room.jpg", label: "Twin Standard Room", order: 4 },
+    { id: "gal_6", url: "/hotel-img/rooftop-infinity-pool.jpg", label: "Infinity Pool", order: 5 },
+    { id: "gal_7", url: "/hotel-img/poolside-deck-sunbeds.jpg", label: "Poolside Deck", order: 6 },
+    { id: "gal_8", url: "/hotel-img/restaurant-fine-dining.jpg", label: "Fine Dining Restaurant", order: 7 },
+    { id: "gal_9", url: "/hotel-img/restaurant-ambience.jpg", label: "Gourmet Buffet", order: 8 },
+    { id: "gal_10", url: "/hotel-img/bar-cocktail-lounge.jpg", label: "Cocktail Lounge", order: 9 },
+    { id: "gal_11", url: "/hotel-img/breakfast-buffet-spread.jpg", label: "Breakfast Spread", order: 10 },
+    { id: "gal_12", url: "/hotel-img/spa-wellness-sanctuary.jpg", label: "Luxury Spa", order: 11 },
+    { id: "gal_13", url: "/hotel-img/spa-ayurvedic-massage.jpg", label: "Spa Therapies", order: 12 },
+    { id: "gal_14", url: "/hotel-img/hotel-facade-palace.jpg", label: "Palace Architecture", order: 13 },
+    { id: "gal_15", url: "/hotel-img/hotel-exterior-night.jpg", label: "Night Illumination", order: 14 },
+    { id: "gal_16", url: "/hotel-img/banquet-wedding-hall.jpg", label: "Banquet & Events", order: 15 },
+    { id: "gal_17", url: "/hotel-img/conference-meeting-room.jpg", label: "Conference Room", order: 16 },
+    { id: "gal_18", url: "/hotel-img/fitness-gym-center.jpg", label: "Fitness Center", order: 17 },
+    { id: "gal_19", url: "/hotel-img/rooftop-sky-terrace.jpg", label: "Sky Terrace", order: 18 },
+    { id: "gal_20", url: "/hotel-img/garden-courtyard-outdoor.jpg", label: "Garden Courtyard", order: 19 },
 ];
 
 (async () => {
