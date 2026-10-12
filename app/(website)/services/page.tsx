@@ -90,7 +90,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="fade-in-up">
                         <div className="about-main-img" style={{ height: "100%", minHeight: 400 }}>
-                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800" alt="Hospitality Scene" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            <img src="/hotel-img/IMG_0908.JPG" alt="Hotel Grand Eagle Hospitality" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             <div className="about-img-overlay" />
                         </div>
                     </div>

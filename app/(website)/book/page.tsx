@@ -425,7 +425,7 @@ function BookingForm() {
                                 {availableRooms.map(room => (
                                     <div key={room.id} className="book-room-card">
                                         <div className="book-room-img">
-                                            <img src={room.images?.[0] || 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1000'} alt={room.roomName} />
+                                            <img src={room.images?.[0] || '/hotel-img/IMG_0873.JPG'} alt={room.roomName} />
                                         </div>
                                         <div className="book-room-body">
                                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, marginBottom: 12, flexWrap: "wrap" }}>

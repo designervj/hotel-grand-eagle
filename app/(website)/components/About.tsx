@@ -9,8 +9,8 @@ export default function About() {
           <div className="about-gold-bar"></div>
           <div className="about-main-img fade-in-up visible">
             <img
-              src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800"
-              alt="Hotel Grand Eagle Lobby"
+              src="/hotel-img/IMG_0873.JPG"
+              alt="Hotel Grand Eagle Room"
               loading="lazy"
               style={{ width: "100%", height: "110%", marginTop: "-5%", objectFit: "cover" }}
             />
@@ -18,8 +18,8 @@ export default function About() {
           </div>
           <div className="about-accent-img fade-in-up visible">
             <img
-              src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800"
-              alt="Pool"
+              src="/hotel-img/IMG_0890 (1).JPG"
+              alt="Hotel Grand Eagle Suite"
               loading="lazy"
             />
           </div>

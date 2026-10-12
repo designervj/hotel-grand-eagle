@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Hero from "./components/Hero";
 import Rooms from "./components/Rooms";
+import Gallery from "./components/Gallery";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Loading from "./components/Loading";
@@ -61,7 +62,12 @@ function HeroRenderer({ sec }: { sec: HeroSection }) {
 
     const images = sec.images?.length > 0
         ? sec.images
-        : [{ url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop" }];
+        : [
+            { url: "/hotel-img/IMG_0876.JPG" },
+            { url: "/hotel-img/IMG_0947 (1).JPG" },
+            { url: "/hotel-img/IMG_0897.JPG" },
+            { url: "/hotel-img/9b80559ce359f116.jpg" },
+        ];
 
     useEffect(() => {
         if (images.length <= 1) return;
@@ -403,6 +409,9 @@ export default function HomePage() {
 
             {/* Rooms (passed fetched data) */}
             <Rooms roomsData={rooms} amenitiesData={amenities} />
+
+            {/* Gallery Section */}
+            <Gallery />
 
             {/* Dynamic CMS text/image and quote sections */}
             {hasCustomAbout && (

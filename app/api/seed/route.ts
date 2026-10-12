@@ -48,33 +48,6 @@ const CUSTOMERS = [
 // Full room type documents — shape matches the Room TypeScript type
 const ROOMS = [
     {
-        id: "rm1",
-        roomName: "Deluxe King Room",
-        slug: "deluxe-king-room",
-        roomCategory: "Deluxe",
-        bedType: "King",
-        maxOccupancy: 2,
-        roomSize: 42,
-        view: "City View",
-        smokingPolicy: "Non-Smoking",
-        balconyAvailable: true,
-        roomTheme: "Modern",
-        soundproofingLevel: "Premium",
-        inRoomWorkspace: true,
-        entertainmentOptions: "Smart TV + Sound System",
-        bathroomType: "Rain Shower + Tub",
-        floorPreference: "Upper Floor",
-        basePrice: 35000,
-        extraBedPrice: 2500,
-        refundable: true,
-        currency: "INR",
-        amenityIds: ["fb7", "fr6", "fr7", "fr10", "fs4"],
-        images: [
-            "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800",
-            "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
-        ],
-    },
-    {
         id: "rm2",
         roomName: "Royal Suite",
         slug: "royal-suite",
@@ -97,8 +70,10 @@ const ROOMS = [
         currency: "INR",
         amenityIds: ["fw3", "fr2", "fr3", "fr5", "fr9", "fb7", "fs4"],
         images: [
-            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-            "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+            "/hotel-img/9b80559ce359f116 (1).jpg",
+            "/hotel-img/IMG_0897.JPG",
+            "/hotel-img/IMG_0919 (1).JPG",
+            "/hotel-img/5d5ccf8281fe2a65 (1).jpg",
         ],
     },
     {
@@ -124,7 +99,9 @@ const ROOMS = [
         currency: "INR",
         amenityIds: ["fb7", "fr10"],
         images: [
-            "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800",
+            "/hotel-img/IMG_0908.JPG",
+            "/hotel-img/IMG_0919 (1).JPG",
+            "/hotel-img/17c48949ff00c521.jpg",
         ],
     },
 ];
@@ -228,21 +205,7 @@ export async function GET() {
         const SUITE_FEATURES = ["Butler Service", "Private Terrace", "Panoramic View", "Connecting Door", "Extra King Bed"];
         const TWIN_FEATURES = ["Accessible", "Garden View", "Connecting Door", "Ground Floor", "Extra Quiet"];
         const ROOM_INVENTORY = [
-            // Deluxe King Rooms — Floor 1
-            ...["101", "102", "103", "104", "105"].map((n, i) => ({
-                id: `room_${n}`, roomNumber: n, roomTypeId: "rm1", roomTypeName: "Deluxe King Room",
-                floor: 1, status: randomStatus(), isActive: true,
-                features: i % 3 === 0 ? [DELUXE_FEATURES[i % DELUXE_FEATURES.length]] : [],
-                notes: "", lastCleaned: addDays(NOW, -(i % 3)), createdAt: new Date().toISOString(),
-            })),
-            // Deluxe King Rooms — Floor 2
-            ...["201", "202", "203"].map((n, i) => ({
-                id: `room_${n}`, roomNumber: n, roomTypeId: "rm1", roomTypeName: "Deluxe King Room",
-                floor: 2, status: randomStatus(), isActive: true,
-                features: i === 1 ? ["Corner Room", "City View Premium"] : [],
-                notes: "", lastCleaned: addDays(NOW, -(i % 2)), createdAt: new Date().toISOString(),
-            })),
-            // Twin Standard Rooms — Floor 3
+            // Twin Standard Rooms — Floor 1
             ...["301", "302", "303", "304", "305"].map((n, i) => ({
                 id: `room_${n}`, roomNumber: n, roomTypeId: "rm3", roomTypeName: "Twin Standard",
                 floor: 3, status: randomStatus(), isActive: true,

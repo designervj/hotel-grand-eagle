@@ -65,7 +65,12 @@ export default function Hero() {
 
   const images = heroData?.images && heroData.images.length > 0
     ? heroData.images
-    : [{ url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop" }];
+    : [
+        { url: "/hotel-img/IMG_0876.JPG" },
+        { url: "/hotel-img/IMG_0947 (1).JPG" },
+        { url: "/hotel-img/IMG_0897.JPG" },
+        { url: "/hotel-img/9b80559ce359f116.jpg" },
+      ];
 
   useEffect(() => {
     if (images.length <= 1) return;

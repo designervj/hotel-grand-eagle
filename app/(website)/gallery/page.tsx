@@ -2,18 +2,34 @@
 import React, { useEffect, useState } from "react";
 
 const FALLBACK_IMAGES = [
-    "https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=1200",
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200",
-    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1200",
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200",
-    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200",
-    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200",
-    "https://images.unsplash.com/photo-1590490359683-658d3d23f972?q=80&w=1200",
-    "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1200",
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1200",
-    "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200",
-    "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=1200",
-    "https://images.unsplash.com/photo-1551882547-ff43c63efe81?q=80&w=1200"
+    "/hotel-img/IMG_0873.JPG",
+    "/hotel-img/IMG_0876.JPG",
+    "/hotel-img/IMG_0890 (1).JPG",
+    "/hotel-img/IMG_0893 (1).JPG",
+    "/hotel-img/IMG_0896.JPG",
+    "/hotel-img/IMG_0897.JPG",
+    "/hotel-img/IMG_0908.JPG",
+    "/hotel-img/IMG_0919 (1).JPG",
+    "/hotel-img/IMG_0926.JPG",
+    "/hotel-img/IMG_0941.JPG",
+    "/hotel-img/IMG_0947 (1).JPG",
+    "/hotel-img/IMG_0950.JPG",
+    "/hotel-img/IMG_0953.JPG",
+    "/hotel-img/IMG_0955.JPG",
+    "/hotel-img/17c48949ff00c521.jpg",
+    "/hotel-img/1e88ecfffc39572b.jpg",
+    "/hotel-img/2e41589097cad4ce.jpg",
+    "/hotel-img/487eca713cf2c776.jpg",
+    "/hotel-img/5d5ccf8281fe2a65.jpg",
+    "/hotel-img/73bf5b889aced7ee.webp",
+    "/hotel-img/8dffd4e633638b34.jpg",
+    "/hotel-img/9b80559ce359f116.jpg",
+    "/hotel-img/bad0189833006d97.jpg",
+    "/hotel-img/c9da6d8c8ba3815d.jpg",
+    "/hotel-img/ceef6ebf560e411d.jpg",
+    "/hotel-img/e02ab1f8503f40b4.jpg",
+    "/hotel-img/f7d235a552b69374.jpg",
+    "/hotel-img/ff84731cb1484a5f.jpg"
 ];
 
 export default function GalleryPage() {
