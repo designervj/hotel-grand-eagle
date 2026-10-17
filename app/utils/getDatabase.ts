@@ -7,25 +7,47 @@ if (!process.env.MONGODB_URI) {
 const uri = process.env.MONGODB_URI;
 const options = {};
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
+  var _mongoClientUri: string | undefined;
 }
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+let prodClientPromise: Promise<MongoClient> | undefined;
+
+function getClientPromise(): Promise<MongoClient> {
+  const currentUri = process.env.MONGODB_URI;
+  if (!currentUri) {
+    throw new Error("Please add MONGODB_URI to .env.local!");
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+
+  if (process.env.NODE_ENV === "development") {
+    if (!global._mongoClientPromise || global._mongoClientUri !== currentUri) {
+      const client = new MongoClient(currentUri, options);
+      global._mongoClientUri = currentUri;
+      global._mongoClientPromise = client.connect().catch((err) => {
+        global._mongoClientPromise = undefined;
+        throw err;
+      });
+    }
+    return global._mongoClientPromise;
+  } else {
+    if (!prodClientPromise) {
+      const client = new MongoClient(currentUri, options);
+      prodClientPromise = client.connect();
+    }
+    return prodClientPromise;
+  }
 }
 
-export { clientPromise };
+export const clientPromise = {
+  then: <TResult1 = MongoClient, TResult2 = never>(
+    onfulfilled?: ((value: MongoClient) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null
+  ) => getClientPromise().then(onfulfilled, onrejected),
+  catch: <TResult = never>(
+    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null
+  ) => getClientPromise().catch(onrejected)
+} as unknown as Promise<MongoClient>;
 
 export async function getDatabase(): Promise<Db> {
   const client = await clientPromise;

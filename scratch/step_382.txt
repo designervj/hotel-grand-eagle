@@ -1,0 +1,2 @@
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<string>("All");

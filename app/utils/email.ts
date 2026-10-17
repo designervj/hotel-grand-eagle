@@ -6,14 +6,22 @@ import type { Booking } from "@/app/components/types";
  * Uses SMTP settings from environment variables.
  */
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_SERVER_HOST,
-  port: Number(process.env.EMAIL_SERVER_PORT) || 587,
-  auth: {
-    user: process.env.EMAIL_SERVER_USER,
-    pass: process.env.EMAIL_SERVER_PASSWORD,
-  },
-});
+function getTransporter() {
+  const port = Number(process.env.EMAIL_SERVER_PORT) || 587;
+  const isSecure = port === 465;
+  return nodemailer.createTransport({
+    host: process.env.EMAIL_SERVER_HOST || "smtp.gmail.com",
+    port,
+    secure: isSecure,
+    auth: {
+      user: process.env.EMAIL_SERVER_USER,
+      pass: process.env.EMAIL_SERVER_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+}
 
 export interface ContactEnquiryEmail {
   name: string;
@@ -57,6 +65,7 @@ function getErrorField(error: unknown, field: "code" | "command") {
 export async function sendContactEnquiryNotification(enquiry: ContactEnquiryEmail) {
   const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_SERVER_USER;
   const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_SERVER_USER;
+  const bccEmail = process.env.BCC_EMAIL;
 
   if (!hasEmailConfig()) {
     console.warn("[EmailService] Missing email configuration. Contact enquiry saved but email not sent.");
@@ -106,9 +115,11 @@ export async function sendContactEnquiryNotification(enquiry: ContactEnquiryEmai
   `;
 
   try {
+    const transporter = getTransporter();
     await transporter.sendMail({
       from: fromEmail,
       to: adminEmail,
+      ...(bccEmail ? { bcc: bccEmail } : {}),
       replyTo: enquiry.email,
       subject: `New enquiry from ${enquiry.name} - Hotel Grand Eagle`,
       html: htmlContent,
@@ -125,6 +136,7 @@ export async function sendContactEnquiryNotification(enquiry: ContactEnquiryEmai
 export async function sendAdminBookingNotification(booking: Booking) {
   const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_SERVER_USER;
   const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_SERVER_USER;
+  const bccEmail = process.env.BCC_EMAIL;
 
   // Verify core configuration
   const requiredEnv = [
@@ -210,9 +222,11 @@ export async function sendAdminBookingNotification(booking: Booking) {
   `;
 
   try {
+    const transporter = getTransporter();
     await transporter.sendMail({
       from: fromEmail,
       to: adminEmail,
+      ...(bccEmail ? { bcc: bccEmail } : {}),
       subject: `New Booking: ${booking.guestName} (${booking.bookingRef})`,
       html: htmlContent,
       text: `New booking received from ${booking.guestName}. Ref: ${booking.bookingRef}. Check-in: ${booking.checkIn}, Check-out: ${booking.checkOut}, Room: ${booking.roomTypeName}, Total: ₹${booking.grandTotal}.`,
@@ -226,5 +240,100 @@ export async function sendAdminBookingNotification(booking: Booking) {
     if (code) console.error("Error code:", code);
     if (command) console.error("SMTP Command:", command);
     // We don't throw the error, allowing the caller (API route) to stay successful
+  }
+}
+
+/** Send a booking confirmation email to the guest who just booked. */
+export async function sendGuestBookingConfirmation(booking: Booking) {
+  const guestEmail = booking.guestEmail;
+  const fromEmail = process.env.EMAIL_FROM || process.env.EMAIL_SERVER_USER;
+  const bccEmail = process.env.BCC_EMAIL;
+
+  if (!hasEmailConfig()) {
+    console.warn("[EmailService] Missing email config. Skipping guest confirmation.");
+    return false;
+  }
+
+  if (!guestEmail) {
+    console.warn("[EmailService] No guest email found. Skipping guest confirmation.");
+    return false;
+  }
+
+  const checkInDate = new Date(booking.checkIn).toLocaleDateString("en-IN", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+  });
+  const checkOutDate = new Date(booking.checkOut).toLocaleDateString("en-IN", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+  });
+
+  const htmlContent = `
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 620px; margin: 0 auto; background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; overflow: hidden;">
+
+      <!-- Header -->
+      <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 40px 30px; text-align: center;">
+        <h1 style="color: #D4A857; margin: 0; font-size: 28px; letter-spacing: 2px;">HOTEL GRAND EAGLE</h1>
+        <p style="color: #aaa; margin: 8px 0 0; font-size: 13px; letter-spacing: 1px;">SITAPURA &middot; JAIPUR</p>
+        <div style="margin-top: 20px;">
+          <span style="background: #D4A857; color: #1a1a2e; font-weight: bold; padding: 6px 18px; border-radius: 20px; font-size: 13px;">&#10003; BOOKING CONFIRMED</span>
+        </div>
+      </div>
+
+      <!-- Greeting -->
+      <div style="padding: 30px 30px 10px;">
+        <p style="font-size: 18px; color: #333; margin: 0;">Dear <strong>${escapeHtml(booking.guestName)}</strong>,</p>
+        <p style="color: #666; font-size: 14px; line-height: 1.7; margin-top: 10px;">Thank you for choosing Hotel Grand Eagle! Your reservation has been confirmed. We look forward to welcoming you.</p>
+      </div>
+
+      <!-- Booking Details Box -->
+      <div style="margin: 10px 30px 20px; background: #f9f5ee; border-left: 4px solid #D4A857; border-radius: 8px; padding: 20px 24px;">
+        <h2 style="color: #D4A857; font-size: 15px; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 1px;">Booking Summary</h2>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <tr><td style="padding: 6px 0; color: #888; width: 160px;">Booking Reference</td><td style="padding: 6px 0; font-weight: bold; color: #333;">${escapeHtml(String(booking.bookingRef))}</td></tr>
+          <tr><td style="padding: 6px 0; color: #888;">Room Type</td><td style="padding: 6px 0; color: #333;">${escapeHtml(booking.roomTypeName || "")}</td></tr>
+          ${booking.roomNumber ? `<tr><td style="padding: 6px 0; color: #888;">Room Number</td><td style="padding: 6px 0; color: #333;">${escapeHtml(String(booking.roomNumber))}</td></tr>` : ""}
+          <tr><td style="padding: 6px 0; color: #888;">Check-in</td><td style="padding: 6px 0; color: #333;">${checkInDate} <span style="color:#D4A857;">(from 3:00 PM)</span></td></tr>
+          <tr><td style="padding: 6px 0; color: #888;">Check-out</td><td style="padding: 6px 0; color: #333;">${checkOutDate} <span style="color:#D4A857;">(by 12:00 PM)</span></td></tr>
+          <tr><td style="padding: 6px 0; color: #888;">Duration</td><td style="padding: 6px 0; color: #333;">${booking.nights} Night${booking.nights > 1 ? "s" : ""}</td></tr>
+          <tr><td style="padding: 6px 0; color: #888;">Guests</td><td style="padding: 6px 0; color: #333;">${booking.adults} Adult${booking.adults > 1 ? "s" : ""}${booking.children ? `, ${booking.children} Child${booking.children > 1 ? "ren" : ""}` : ""}</td></tr>
+          <tr style="border-top: 1px solid #e0d5c5;"><td style="padding: 14px 0 6px; color: #888; font-size: 15px;">Total Amount</td><td style="padding: 14px 0 6px; font-size: 20px; font-weight: bold; color: #D4A857;">&#8377;${(booking.grandTotal || 0).toLocaleString("en-IN")}</td></tr>
+        </table>
+      </div>
+
+      ${booking.specialRequests ? `
+      <div style="margin: 0 30px 20px; padding: 14px 18px; background: #fff8eb; border-radius: 8px; font-size: 13px; color: #666; font-style: italic;">
+        <strong style="color: #D4A857;">Your Special Request:</strong> "${escapeHtml(booking.specialRequests)}"
+      </div>` : ""}
+
+      <!-- Hotel Info -->
+      <div style="margin: 0 30px 30px; padding: 18px; background: #f0f4ff; border-radius: 8px; font-size: 13px; color: #555;">
+        <p style="margin: 0 0 8px; font-weight: bold; color: #333;">&#128205; Hotel Address</p>
+        <p style="margin: 0 0 10px;">Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022</p>
+        <p style="margin: 0;"><strong>&#128222;</strong> 063678 50548 &nbsp;&nbsp; <strong>&#9993;</strong> grandeaglehotel@gmail.com</p>
+      </div>
+
+      <!-- Footer -->
+      <div style="background: #1a1a2e; padding: 20px 30px; text-align: center;">
+        <p style="color: #aaa; font-size: 12px; margin: 0;">Need help? Reply to this email or call us anytime.</p>
+        <p style="color: #666; font-size: 11px; margin: 8px 0 0;">&copy; ${new Date().getFullYear()} Hotel Grand Eagle. All rights reserved.</p>
+      </div>
+
+    </div>
+  `;
+
+  try {
+    const transporter = getTransporter();
+    await transporter.sendMail({
+      from: fromEmail,
+      to: guestEmail,
+      ...(bccEmail ? { bcc: bccEmail } : {}),
+      subject: `Booking Confirmed ✓ – ${booking.bookingRef} | Hotel Grand Eagle`,
+      html: htmlContent,
+      text: `Dear ${booking.guestName},\n\nYour booking at Hotel Grand Eagle is confirmed!\n\nBooking Ref: ${booking.bookingRef}\nRoom: ${booking.roomTypeName}\nCheck-in: ${checkInDate}\nCheck-out: ${checkOutDate}\nNights: ${booking.nights}\nTotal: Rs.${(booking.grandTotal || 0).toLocaleString("en-IN")}\n\nAddress: Commercial Complex, C-50, near JECC, Sitapura, Jaipur 302022\nPhone: 063678 50548\n\nThank you for choosing Hotel Grand Eagle!`,
+    });
+    console.log(`[EmailService] Guest confirmation sent to ${guestEmail} for ${booking.bookingRef}`);
+    return true;
+  } catch (error: unknown) {
+    console.error(`[EmailService] Failed to send guest confirmation for ${booking.bookingRef}:`, getErrorMessage(error));
+    return false;
   }
 }

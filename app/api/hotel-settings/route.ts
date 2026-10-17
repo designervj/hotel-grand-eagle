@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
     country: "India",
     contactNumber: "063678 50548",
     phone: "063678 50548",
-    email: "reservations@hotelgrandeagle.com",
+    email: "grandeaglehotel@gmail.com",
     checkInTime: "15:00",
     checkOutTime: "12:00",
     starRating: 3,
