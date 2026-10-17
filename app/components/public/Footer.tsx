@@ -59,7 +59,7 @@ export default function Footer() {
                         </li>
                         <li className="flex items-center gap-3">
                             <span>✉️</span>
-                            <span>{hotel?.email || "reservations@hotelgrandeagle.com"}</span>
+                            <span>{hotel?.email || "grandeaglehotel@gmail.com"}</span>
                         </li>
                     </ul>
                 </div>

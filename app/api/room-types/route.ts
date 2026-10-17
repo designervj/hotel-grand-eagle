@@ -9,8 +9,10 @@ export async function GET(req: Request) {
     const db = await getDatabase();
     const query = withTestMode({}, isTest);
     const rooms = await db.collection("room_types").find(query).toArray();
-    // Strip MongoDB internal _id from results
-    const clean = rooms.map(({ _id, ...rest }) => rest);
+    const clean = rooms.map(({ _id, ...rest }) => ({
+      id: rest.id || _id.toString(),
+      ...rest
+    }));
     return NextResponse.json(clean);
   } catch (err) {
     console.error("API error fetching room types:", err);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDatabase } from "@/app/utils/getDatabase";
-import { sendAdminBookingNotification } from "@/app/utils/email";
+import { sendAdminBookingNotification, sendGuestBookingConfirmation } from "@/app/utils/email";
 import { Booking } from "@/app/components/types";
 import { getTestMode, withTestMode, attachTestMode } from "@/app/utils/testMode";
 
@@ -156,8 +156,11 @@ export async function POST(req: Request) {
         const booking = attachTestMode(body, isTest);
         const result = await db.collection("bookings").insertOne(booking);
 
-        // Notify Admin (Await for reliability)
+        // Notify Admin
         await sendAdminBookingNotification(body);
+
+        // Confirm booking to the guest
+        await sendGuestBookingConfirmation(body);
 
         // Sync room status if checking in immediately
         if (body.roomNumber && body.status === "checked-in") {

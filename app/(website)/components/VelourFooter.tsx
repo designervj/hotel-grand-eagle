@@ -15,7 +15,7 @@ export default function VelourFooter() {
   const name    = hotel?.name    || "Hotel Grand Eagle";
   const address = hotel?.address || "Commercial Complex, C-50, near JECC, Sanganer, Sitapura Industrial Area, Sitapura, Jaipur, Rajasthan 302022";
   const phone   = hotel?.phone   || hotel?.contactNumber || "063678 50548";
-  const email   = hotel?.email   || "reservations@hotelgrandeagle.com";
+  const email   = hotel?.email   || "grandeaglehotel@gmail.com";
 
   return (
     <footer className="ft-root">

@@ -115,7 +115,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <span className="contact-lbl">Email Address</span>
-                                    <span className="contact-val">{hotel?.email || "reservations@hotelgrandeagle.com"}</span>
+                                    <span className="contact-val">{hotel?.email || "grandeaglehotel@gmail.com"}</span>
                                 </div>
                             </div>
                             <div className="contact-item fade-in-up">
