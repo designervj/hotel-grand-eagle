@@ -491,10 +491,7 @@ function BookingForm() {
                                             )}
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="input-label" style={{ color: "var(--ivory-dim)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10, display: "block" }}>Special Requirements</label>
-                                        <textarea className="form-textarea" rows={4} value={guestInfo.specialRequests} onChange={e => setGuestInfo(p => ({...p, specialRequests: e.target.value}))} placeholder="Dietary needs, pillow preferences, or timing requests..." />
-                                    </div>
+
                                 </form>
                             </div>
 
